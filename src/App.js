@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
+import Sidebar from './Componentes/Sidebar';
+import Home from './Componentes/Home';
+import Estoque from './Componentes/Estoque';
+import Pedidos from './Componentes/Pedidos';
+import Clientes from './Componentes/Clientes';
 
 function App() {
+  const NAV_LINKS = [
+    { name: "HOME", path: "/" },
+    { name: "ESTOQUE", path: "/estoque" },
+    { name: "PEDIDOS", path: "/pedidos" },
+    { name: "CLIENTES", path: "/clientes" },  
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Sidebar NAV_LINKS={NAV_LINKS} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/estoque" element={<Estoque />} />
+          <Route path="/pedidos" element={<Pedidos />} />
+          <Route path="/clientes" element={<Clientes />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
